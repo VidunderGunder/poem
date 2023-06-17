@@ -1,5 +1,8 @@
-import { createSignal, onCleanup, type Component, type JSX } from "solid-js";
+import { createSignal, type Component, type JSX } from "solid-js";
 
+/**
+ * Hack to get syntax highlighting for css template literal
+ */
 function css(strings: TemplateStringsArray, ...values: any[]) {
   let str = "";
   strings.forEach((string, i) => {
@@ -8,12 +11,8 @@ function css(strings: TemplateStringsArray, ...values: any[]) {
   return str;
 }
 
-const maxCols = 25;
 const [text, setText] = createSignal("");
-const [height, setHeight] = createSignal<number>();
 const handleInput: JSX.EventHandlerUnion<HTMLElement, InputEvent> = (e) => {
-  // 'oninput="this.parentNode.dataset.value = this.value" rows="1" placeholder="hi"';
-
   const target = e.currentTarget;
   const value = target.textContent;
   setText(value ?? "");
